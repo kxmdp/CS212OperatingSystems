@@ -1,0 +1,151 @@
+Animal,Identification Number,Breed,Category,Sex,Size in Kilograms,Health Status,Date of Arrival in the Shelter,Status of Adoption,Date of Adoption,Name of Adopter
+Horse,MHA803,Arabian,Mammal,Male,376.62,In Treatment,2022-07-04,Adopted,2023-08-04,Mr. Ethan Frazier
+Goat,MGP821,Pygmy,Mammal,Male,220.41,Healthy,2022-02-12,Adopted,2023-07-18,Judith Johnson
+Cat,MCS441,Siamese,Mammal,Male,69.11,Healthy,2011-04-20,Adopted,2015-05-02,Jason Estes
+Cat,MCS188,Siamese,Mammal,Male,5.54,Healthy,2014-09-12,Adopted,2015-12-10,Susan Miller DDS
+Goat,MGP413,Pygmy,Mammal,Male,30.05,Special Needs - Missing a Limb,2010-04-27,Adopted,2021-02-03,Deborah Cain
+Goat,MGP816,Pygmy,Mammal,Female,333.12,Healthy,2019-11-26,Adopted,2020-12-05,Edward Cunningham
+Dog,MDL387,Labrador,Mammal,Male,234.87,Healthy,2012-03-28,Adopted,2013-03-19,Sarah Mercer
+Cat,MCS380,Siamese,Mammal,Male,364.54,Healthy,2022-10-11,Adopted,2023-05-05,Cory Anderson
+Dog,MDL297,Labrador,Mammal,Female,226.95,Healthy,2014-08-13,Adopted,2021-12-10,Thomas Daniel
+Dog,MDL757,Labrador,Mammal,N/A,16.82,In Treatment,2011-04-25,Adopted,2021-07-01,Kimberly Abbott
+Goat,MGP278,Pygmy,Mammal,N/A,21.18,In Treatment,2016-06-06,Adopted,2019-08-11,David Ross
+Dog,MDL159,Labrador,Mammal,Female,377.68,Special Needs - Blind,2016-04-02,Adopted,2023-07-15,Amber Perkins
+Cat,MCS425,Siamese,Mammal,Male,266.06,Healthy,2014-04-08,Adopted,2019-12-05,Megan Norton
+Cat,MCS553,Siamese,Mammal,Female,497.8,Healthy,2022-11-10,Adopted,2023-11-19,April Jones
+Cat,MCS295,Siamese,Mammal,Male,138.61,In Treatment,2018-02-02,Adopted,2022-11-04,Eduardo Sanford
+Cat,MCS619,Siamese,Mammal,Female,67.05,Healthy,2021-10-17,Adopted,2023-09-27,Elizabeth Cohen
+Dog,MDL671,Labrador,Mammal,Male,95.36,Special Needs - Deaf,2015-08-03,Adopted,2018-08-25,Paul Stuart
+Betta,FBS161,Siamese Fighting Fish,Fish,Female,380.16,Healthy,2014-12-11,Adopted,2020-04-14,Daisy Smith
+Salamander,AST656,Tiger Salamander,Amphibian,Female,48.55,In Treatment,2021-12-23,Adopted,2022-06-19,Regina Barnett
+Dog,MDL344,Labrador,Mammal,Female,425.37,Healthy,2022-05-24,Adopted,2023-05-19,Penny Robbins
+Rabbit,MRD543,Dwarf,Mammal,N/A,354.16,Healthy,2022-10-09,Adopted,2023-01-19,Rhonda Mason
+Owl,BOB827,Barn Owl,Bird,N/A,399.6,In Treatment,2022-08-09,Adopted,2023-04-25,Greg Moreno
+Snake,RSP649,Python,Reptile,Male,49.04,Healthy,2016-11-10,Adopted,2019-04-28,Elizabeth Small
+Horse,MHA580,Arabian,Mammal,Male,107.43,In Treatment,2014-03-13,Adopted,2015-04-12,Amy Alexander
+Rabbit,MRD635,Dwarf,Mammal,Female,385.88,Special Needs - Deaf,2021-09-25,Adopted,2022-07-16,Ryan Washington
+Goat,MGP430,Pygmy,Mammal,N/A,437.22,Special Needs - Missing a Limb,2012-04-03,Adopted,2020-06-16,Peter Miller
+Rabbit,MRD859,Dwarf,Mammal,N/A,33.32,Special Needs - Missing a Limb,2010-09-19,Adopted,2014-12-21,Christine Bell
+Dog,MDL265,Labrador,Mammal,N/A,498.72,In Treatment,2014-11-05,Adopted,2015-12-25,Jessica Patrick
+Cat,MCS312,Siamese,Mammal,N/A,432.06,Healthy,2020-05-19,Adopted,2022-07-17,Evan Roberts
+Horse,MHA259,Arabian,Mammal,N/A,214.98,Healthy,2017-07-21,Adopted,2023-06-01,Casey Gonzales
+Horse,MHA730,Arabian,Mammal,Male,22.06,In Treatment,2015-07-30,Adopted,2023-07-26,John Perez
+Dog,MDL902,Labrador,Mammal,Male,464.4,In Treatment,2020-04-18,Adopted,2022-07-06,Emily Nguyen
+Goat,MGP815,Pygmy,Mammal,Female,491.35,Healthy,2014-03-04,Adopted,2015-06-16,Ms. Anna Goodman DDS
+Owl,BOB696,Barn Owl,Bird,Male,242.2,In Treatment,2018-03-16,Adopted,2021-12-29,Patricia Anderson
+Salamander,AST928,Tiger Salamander,Amphibian,Male,162.65,In Treatment,2023-10-08,Adopted,2024-01-01,Jasmine Miller
+Cat,MCS127,Siamese,Mammal,Male,158.71,Special Needs - Deaf,2019-02-10,Adopted,2023-05-14,Phillip Swanson
+Owl,BOB691,Barn Owl,Bird,Male,469.89,Special Needs - Blind,2012-05-05,Adopted,2013-04-14,Zachary Carpenter
+Horse,MHA210,Arabian,Mammal,Male,63.26,Healthy,2023-07-27,Adopted,2024-01-01,Donna Mcfarland
+Betta,FBS478,Siamese Fighting Fish,Fish,N/A,439.71,Special Needs - Deaf,2010-03-05,Adopted,2020-01-03,Shannon Smith
+Lizard,RLG768,Gecko,Reptile,Female,433.21,In Treatment,2015-07-04,Adopted,2019-09-13,Emily Rosales
+Goat,MGP137,Pygmy,Mammal,N/A,340.63,Healthy,2023-04-06,Adopted,2024-01-01,Misty Lopez
+Horse,MHA791,Arabian,Mammal,Male,182.96,Healthy,2010-02-11,Adopted,2022-01-24,Stacy Adams
+Horse,MHA815,Arabian,Mammal,Female,62.8,Special Needs - Deaf,2013-10-31,Adopted,2015-02-03,Dylan Calderon
+Rabbit,MRD700,Dwarf,Mammal,Male,483.39,In Treatment,2016-11-02,Adopted,2023-09-30,Laura Arellano
+Salamander,AST577,Tiger Salamander,Amphibian,Male,13.07,In Treatment,2021-07-20,Adopted,2023-05-27,Marc Ramirez
+Salamander,AST264,Tiger Salamander,Amphibian,Male,384.02,Special Needs - Missing a Limb,2013-03-16,Adopted,2022-05-21,Michelle Cox
+Horse,MHA185,Arabian,Mammal,Female,180.88,Special Needs - Missing a Limb,2022-01-12,Adopted,2023-08-23,Jesse Rosales
+Dog,MDL862,Labrador,Mammal,Female,364.11,In Treatment,2015-05-21,Adopted,2022-03-16,Caitlin Ingram
+Horse,MHA831,Arabian,Mammal,Female,66.11,Special Needs - Deaf,2014-09-22,Adopted,2015-03-02,Tara Caldwell
+Cat,MCS832,Siamese,Mammal,Male,47.06,Healthy,2021-11-16,Adopted,2023-11-17,William Strong
+Horse,MHA608,Arabian,Mammal,Female,399.81,In Treatment,2015-11-11,Adopted,2022-08-15,Philip Ortiz
+Rabbit,MRD458,Dwarf,Mammal,Male,456.69,Special Needs - Deaf,2019-11-28,Adopted,2023-09-02,David French
+Dog,MDL992,Labrador,Mammal,Female,52.03,In Treatment,2019-06-18,Adopted,2022-07-20,Ricardo Miranda
+Cat,MCS773,Siamese,Mammal,N/A,294.03,Special Needs - Blind,2021-06-20,Adopted,2022-01-16,Douglas Dalton
+Betta,FBS283,Siamese Fighting Fish,Fish,Female,498.61,Healthy,2014-04-11,Adopted,2020-12-16,Sara Ruiz
+Cat,MCS873,Siamese,Mammal,Male,185.72,Healthy,2021-01-25,Adopted,2022-10-28,Cole Fields
+Horse,MHA231,Arabian,Mammal,Female,462.9,Healthy,2013-04-09,Adopted,2023-05-15,Joanna Jarvis
+Horse,MHA893,Arabian,Mammal,Female,354.18,Healthy,2019-07-22,Adopted,2021-02-12,Ashley Lee
+Dog,MDL968,Labrador,Mammal,Female,235.41,Healthy,2017-09-13,Adopted,2019-01-02,Timothy Bridges
+Dog,MDL427,Labrador,Mammal,Male,404.52,Healthy,2015-12-28,Adopted,2018-03-31,Arthur Martinez
+Horse,MHA917,Arabian,Mammal,Male,235.07,Healthy,2013-05-24,Adopted,2016-05-30,Wendy Robinson
+Goat,MGP836,Pygmy,Mammal,Female,349.88,Special Needs - Missing a Limb,2011-02-01,Adopted,2013-10-13,Mary Reeves
+Goldfish,FGC176,Comet,Fish,Male,109.25,Special Needs - Deaf,2011-08-26,Adopted,2020-03-19,Eric Barker
+Dog,MDL784,Labrador,Mammal,Female,333.68,Special Needs - Blind,2018-08-06,Adopted,2022-01-02,Michael Parks
+Goldfish,FGC141,Comet,Fish,N/A,222.5,Special Needs - Deaf,2016-01-23,Adopted,2022-04-28,Larry Mcdaniel
+Dog,MDL276,Labrador,Mammal,Male,133.41,Special Needs - Blind,2018-03-27,Adopted,2021-02-17,Erika Farrell
+Dog,MDL655,Labrador,Mammal,N/A,313.58,In Treatment,2021-04-15,Adopted,2022-05-13,Ronald Wilson
+Rabbit,MRD350,Dwarf,Mammal,Male,193.51,In Treatment,2022-09-03,Adopted,2023-10-01,Karen Morales
+Rabbit,MRD664,Dwarf,Mammal,Male,337.33,Special Needs - Blind,2011-07-06,Adopted,2018-02-14,Anthony May
+Cat,MCS263,Siamese,Mammal,Male,246.42,In Treatment,2023-12-29,Adopted,2024-01-01,Melissa Johnson
+Dog,MDL329,Labrador,Mammal,Female,337.94,Special Needs - Blind,2014-11-18,Adopted,2021-12-02,Robert Campbell
+Goat,MGP420,Pygmy,Mammal,Male,459.31,Healthy,2022-01-02,Adopted,2023-10-11,Catherine Brown
+Owl,BOB336,Barn Owl,Bird,Female,217.71,Healthy,2013-08-30,Adopted,2023-11-16,Karen Leonard
+Rabbit,MRD800,Dwarf,Mammal,Male,373.28,Healthy,2013-06-15,Adopted,2022-06-30,Shawn Bowman
+Horse,MHA774,Arabian,Mammal,Male,80.51,In Treatment,2022-03-16,Adopted,2023-12-01,Kendra Sandoval
+Betta,FBS749,Siamese Fighting Fish,Fish,N/A,310.42,Healthy,2010-11-11,Adopted,2017-05-03,Carrie Flores
+Cat,MCS565,Siamese,Mammal,Female,183.68,In Treatment,2020-03-30,Adopted,2022-12-16,Lawrence Hanson
+Horse,MHA613,Arabian,Mammal,Female,183.61,Special Needs - Missing a Limb,2013-01-05,Adopted,2019-08-27,Karen Doyle
+Cat,MCS514,Siamese,Mammal,Female,134.46,Special Needs - Deaf,2017-09-18,Adopted,2021-03-24,Christopher Terry
+Cat,MCS374,Siamese,Mammal,N/A,27.69,Special Needs - Blind,2011-03-26,Adopted,2019-01-19,Ashley Johnson
+Goldfish,FGC676,Comet,Fish,Female,81.8,Healthy,2011-08-24,Adopted,2020-10-20,Scott Ellis
+Rabbit,MRD687,Dwarf,Mammal,N/A,196.83,Special Needs - Deaf,2010-05-28,Adopted,2022-09-13,Ashley Shaffer
+Owl,BOB798,Barn Owl,Bird,Female,118.09,Special Needs - Blind,2022-10-13,Adopted,2023-01-02,Roberta Campos
+Cat,MCS496,Siamese,Mammal,Male,292.09,In Treatment,2019-10-12,Adopted,2022-10-17,Tiffany Henderson
+Cat,MCS685,Siamese,Mammal,Male,33.07,Special Needs - Blind,2018-02-24,Adopted,2022-07-28,Thomas Williams
+Betta,FBS633,Siamese Fighting Fish,Fish,Male,475.68,Special Needs - Blind,2010-09-02,Adopted,2014-09-02,Gary Nelson
+Horse,MHA581,Arabian,Mammal,Female,81.91,In Treatment,2011-10-06,Adopted,2015-05-07,Mason Hurst
+Dog,MDL739,Labrador,Mammal,Male,488.73,Healthy,2022-03-11,Adopted,2023-04-13,Amber Gross
+Dog,MDL909,Labrador,Mammal,N/A,486.47,Special Needs - Deaf,2017-03-14,Adopted,2023-11-21,Paul Edwards
+Rabbit,MRD336,Dwarf,Mammal,Male,414.31,Healthy,2023-11-07,Adopted,2024-01-01,Brittney Robinson
+Dog,MDL177,Labrador,Mammal,N/A,490.04,In Treatment,2022-05-14,Available,,
+Dog,MDL953,Labrador,Mammal,N/A,281.21,Healthy,2022-06-01,Available,,
+Dog,MDL378,Labrador,Mammal,Female,307.35,In Treatment,2022-07-26,Available,,
+Frog,AFT626,Tree Frog,Amphibian,Male,21.53,In Treatment,2020-03-10,Available,,
+Goat,MGP228,Pygmy,Mammal,Female,212.75,Healthy,2012-08-07,Available,,
+Goat,MGP315,Pygmy,Mammal,Male,312.28,In Treatment,2011-08-22,Available,,
+Dog,MDL574,Labrador,Mammal,Female,269.95,Special Needs - Blind,2019-04-26,Available,,
+Rabbit,MRD431,Dwarf,Mammal,Female,128.96,Special Needs - Deaf,2020-04-24,Available,,
+Rabbit,MRD556,Dwarf,Mammal,Male,412.57,Special Needs - Missing a Limb,2020-11-23,Available,,
+Rabbit,MRD467,Dwarf,Mammal,N/A,388.48,Healthy,2013-05-07,Available,,
+Snake,RSP334,Python,Reptile,N/A,242.46,Special Needs - Missing a Limb,2011-12-25,Available,,
+Goat,MGP568,Pygmy,Mammal,Male,252.81,Healthy,2018-07-23,Available,,
+Goldfish,FGC813,Comet,Fish,Male,126.91,Healthy,2012-04-28,Available,,
+Rabbit,MRD333,Dwarf,Mammal,Female,437.01,Healthy,2022-07-16,Available,,
+Snake,RSP749,Python,Reptile,Female,287.25,Healthy,2020-12-03,Available,,
+Rabbit,MRD299,Dwarf,Mammal,N/A,424.2,In Treatment,2015-07-10,Available,,
+Lizard,RLG288,Gecko,Reptile,Male,470.51,Healthy,2010-05-12,Available,,
+Frog,AFT556,Tree Frog,Amphibian,Female,226.61,In Treatment,2016-04-28,Available,,
+Snake,RSP984,Python,Reptile,Male,49.37,Healthy,2019-12-04,Available,,
+Snake,RSP359,Python,Reptile,Female,2.18,In Treatment,2013-11-29,Available,,
+Horse,MHA979,Arabian,Mammal,N/A,495.44,In Treatment,2011-07-23,Available,,
+Parrot,BPM314,Macaw,Bird,Female,192.84,Healthy,2019-01-03,Available,,
+Owl,BOB209,Barn Owl,Bird,Female,348.75,Healthy,2023-01-04,Available,,
+Goldfish,FGC384,Comet,Fish,N/A,141.32,Special Needs - Missing a Limb,2013-02-24,Available,,
+Frog,AFT319,Tree Frog,Amphibian,N/A,302.32,Special Needs - Deaf,2015-06-07,Available,,
+Owl,BOB248,Barn Owl,Bird,Male,43.54,In Treatment,2018-12-26,Available,,
+Goat,MGP842,Pygmy,Mammal,Male,257.78,Special Needs - Deaf,2016-04-27,Available,,
+Horse,MHA543,Arabian,Mammal,N/A,72.63,Healthy,2018-06-23,Available,,
+Dog,MDL125,Labrador,Mammal,Male,414.5,In Treatment,2016-10-23,Available,,
+Cat,MCS390,Siamese,Mammal,N/A,468.74,Healthy,2017-06-19,Available,,
+Goat,MGP819,Pygmy,Mammal,N/A,296.08,Healthy,2022-12-31,Available,,
+Rabbit,MRD655,Dwarf,Mammal,Female,37.32,In Treatment,2014-07-02,Available,,
+Betta,FBS962,Siamese Fighting Fish,Fish,Male,27.67,In Treatment,2022-05-17,Available,,
+Dog,MDL839,Labrador,Mammal,Female,218.33,In Treatment,2011-06-04,Available,,
+Cat,MCS439,Siamese,Mammal,Female,428.66,Special Needs - Deaf,2023-05-24,Available,,
+Cat,MCS961,Siamese,Mammal,Male,435.53,In Treatment,2012-04-30,Available,,
+Cat,MCS870,Siamese,Mammal,Male,372.22,Healthy,2023-02-03,Available,,
+Horse,MHA535,Arabian,Mammal,N/A,217.53,In Treatment,2021-12-09,Available,,
+Goat,MGP746,Pygmy,Mammal,Female,253.63,In Treatment,2017-02-13,Available,,
+Cat,MCS446,Siamese,Mammal,Female,101.95,Healthy,2015-11-13,Available,,
+Dog,MDL623,Labrador,Mammal,Female,114.96,In Treatment,2019-08-28,Available,,
+Goat,MGP886,Pygmy,Mammal,N/A,234.31,Special Needs - Blind,2012-10-07,Available,,
+Parrot,BPM563,Macaw,Bird,Female,314.66,In Treatment,2017-06-27,Available,,
+Rabbit,MRD982,Dwarf,Mammal,Female,257.23,Healthy,2014-05-11,Available,,
+Parrot,BPM831,Macaw,Bird,N/A,39.04,In Treatment,2016-01-20,Available,,
+Rabbit,MRD388,Dwarf,Mammal,Male,162.84,Healthy,2023-04-05,Available,,
+Horse,MHA970,Arabian,Mammal,N/A,345.26,In Treatment,2016-12-13,Available,,
+Dog,MDL655,Labrador,Mammal,N/A,224.02,Special Needs - Missing a Limb,2017-02-01,Available,,
+Horse,MHA298,Arabian,Mammal,Male,248.17,In Treatment,2010-04-30,Available,,
+Horse,MHA150,Arabian,Mammal,Male,450.04,Special Needs - Blind,2013-04-16,Available,,
+Rabbit,MRD983,Dwarf,Mammal,Female,490.33,Healthy,2016-05-01,Available,,
+Rabbit,MRD800,Dwarf,Mammal,Male,346.13,Special Needs - Deaf,2020-06-16,Available,,
+Goldfish,FGC889,Comet,Fish,Male,178.68,In Treatment,2011-08-12,Available,,
+Snake,RSP161,Python,Reptile,N/A,466.46,Special Needs - Deaf,2015-04-21,Available,,
+Dog,MDL675,Labrador,Mammal,N/A,11.12,Special Needs - Missing a Limb,2010-04-05,Available,,
+Horse,MHA361,Arabian,Mammal,Female,390.88,Healthy,2022-06-30,Available,,
+Horse,MHA352,Arabian,Mammal,Male,428.82,Special Needs - Deaf,2010-04-29,Available,,
+Dog,MDL382,Labrador,Mammal,Male,389.49,In Treatment,2011-11-19,Available,,
+Cat,MCS180,Siamese,Mammal,Male,237.14,In Treatment,2016-07-11,Available,,
+Parrot,BPM214,Macaw,Bird,Female,362.14,Healthy,2021-12-07,Available,,
