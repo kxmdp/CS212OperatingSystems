@@ -341,14 +341,58 @@ animal_list() {
     pause_and_return
 }
 
-# FRANCIS
 # Function to show arrival and retrieval date summary
 date_summary() {
     clear
     echo "============================================"
     echo "|    ARRIVAL AND RETRIEVAL DATE SUMMARY    |"
     echo "============================================"
-    # code here
+
+    # Check if the CSV file is empty
+    if [ ! -s "$CSV_FILE" ]; then
+        echo "No animal records available."
+        pause_and_return
+        return
+    fi
+    
+    # Calculate earliest and latest arrival dates (8th column), excluding the header
+    earliest_arrival=$(tail -n +2 "$CSV_FILE" | cut -d',' -f8 | sort -t'/' -k3,3 -k1,1n -k2,2n | head -n 1)
+    latest_arrival=$(tail -n +2 "$CSV_FILE" | cut -d',' -f8 | sort -t'/' -k3,3 -k1,1n -k2,2n | tail -n 1)
+
+    echo "Earliest Arrival Date: $earliest_arrival"
+    echo "Latest Arrival Date: $latest_arrival"
+    echo ""
+
+    # Extract valid adoption dates (10th column), excluding the header
+    adoption_dates=$(tail -n +2 "$CSV_FILE" | cut -d',' -f10 | grep -E '^[0-9]{1,2}/[0-9]{1,2}/[0-9]{4}' | sort -t'/' -k3,3 -k1,1n -k2,2n)
+
+    # Get earliest and latest adoption dates
+    earliest_adoption=$(echo "$adoption_dates" | head -n 1)
+    latest_adoption=$(echo "$adoption_dates" | tail -n 1)
+
+    # Check if adoption dates are found
+    if [ -z "$earliest_adoption" ]; then
+        earliest_adoption="No valid adoption dates"
+    fi
+
+    if [ -z "$latest_adoption" ]; then
+        latest_adoption="No valid adoption dates"
+    fi
+
+    echo "Earliest Adoption Date: $earliest_adoption"
+    echo "Latest Adoption Date: $latest_adoption"
+    echo ""
+
+    # Count the number of adopted animals, excluding the header
+    adopted_count=$(tail -n +2 "$CSV_FILE" | cut -d',' -f9 | grep -c 'Adopted')
+
+    # Count the number of available animals, excluding the header
+    available_count=$(tail -n +2 "$CSV_FILE" | cut -d',' -f9 | grep -c 'Available')
+
+    echo "Number of Animals Adopted: $adopted_count"
+    echo "Number of Available Animals: $available_count"
+    echo ""
+
     pause_and_return
 }
 
