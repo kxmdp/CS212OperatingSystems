@@ -471,7 +471,7 @@ animal_list() {
             status = ($9 == "Adopted" ? "Adopted" : "Available"); # Determine status based on adoption column
             # Print formatted output for each row with arrival and adoption dates
             printf("%-3d %-9s %-17s %-13s %-13s %-10s\n", NR-1, $2, $1, $8, ($9 == "Adopted" ? $10 : "N/A"), status);
-        }' $DATA_FILE | sort -k4,4 | head -n 10 | awk '{printf "%-3d %-9s %-17s %-13s %-13s %-10s\n", NR, $2, $3, $4, $5, $6}'
+        }' $CSV_FILE | sort -k4,4 | head -n 10 | awk '{printf "%-3d %-9s %-17s %-13s %-13s %-10s\n", NR, $2, $3, $4, $5, $6}'
     }
 
     # Function to display recently arrived animals in the shelter
@@ -481,7 +481,7 @@ animal_list() {
         printf "%-5s %-10s %-20s %-15s\n" "----" "----------" "-------------------" "---------------"
 
         # Extract relevant fields, sort by arrival date in reverse (most recent), and display the top 10
-        awk -F, 'NR > 1 {printf "%s,%s,%s,%s\n", $2, $3, $1, $8}' $DATA_FILE | \
+        awk -F, 'NR > 1 {printf "%s,%s,%s,%s\n", $2, $3, $1, $8}' $CSV_FILE | \
         sort -t, -k4,4r | head -n 10 | \
         awk -F, '{printf "%-5d %-10s %-20s %-15s\n", NR, $1, $2, $4}'
     }
@@ -493,7 +493,7 @@ animal_list() {
         printf "%-5s %-10s %-20s %-15s\n" "----" "----------" "-------------------" "---------------"
 
         # Extract relevant fields for adopted animals, sort by adoption date, and display the top 10
-        awk -F, 'NR > 1 && $9 == "Adopted" {printf "%s,%s,%s,%s\n", $2, $3, $1, $10}' $DATA_FILE | \
+        awk -F, 'NR > 1 && $9 == "Adopted" {printf "%s,%s,%s,%s\n", $2, $3, $1, $10}' $CSV_FILE | \
         sort -t, -k4,4r | head -n 10 | \
         awk -F, '{printf "%-5d %-10s %-20s %-15s\n", NR, $1, $2, $4}'
     }
