@@ -3,20 +3,28 @@
 # File path for animal records CSV
 CSV_FILE=~/212Proj/animalrecords
 
+# Color
+WHITE="\e[97m"
+GREEN="\e[32m"
+YELLOW="\e[33m"
+RED="\e[31m"
+CYAN="\e[36m"
+RESET="\e[0m"
+
 # Function to clear the screen and show the welcome page
 welcome_page() {
     clear
     echo "********************************************"
     echo "*                                          *"
-    echo "*    ANIMAL SHELTER AND ADOPTION SYSTEM    *"
+    echo "*    ${WHITE}ANIMAL SHELTER AND ADOPTION SYSTEM${RESET}    *"
     echo "*                                          *"
     echo "********************************************"
     echo ""
-    echo "           Bringing Order to Care           "
-    echo "      Helping Animals Find Their Home!      "
+    echo "           ${WHITE}Bringing Order to Care${RESET}           "
+    echo "      ${WHITE}Helping Animals Find Their Home!${RESET}      "
     echo ""
     echo "********************************************"
-    echo "        Press any key to continue...        "
+    echo "        ${GREEN}Press any key to continue...${RESET}        "
     echo "********************************************"
     read -n 1 -s
 }
