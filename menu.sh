@@ -346,12 +346,17 @@ search_animal() {
 # CRANE
 # Function to show total number of animals and by category
 total_animals() {
-    clear
-    echo "============================================"
-    echo "|    TOTAL NUMBER OF ANIMALS & CATEGORY    |"
-    echo "============================================"
-    # code here
+clear
+echo "============================================"
+echo "|    TOTAL NUMBER OF ANIMALS & CATEGORY    |"
+echo "============================================"
+echo -e "\e[1;34m"
+
+if [[ ! -f "$CSV_FILE" ]]; then
+    echo -e "\e[1;31mError: CSV file not found!\e[0m"
     pause_and_return
+    return
+fi
 }
 
 # ALVIN
