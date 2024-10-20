@@ -33,9 +33,10 @@ main_menu() {
         echo "| 3. Remove Animal from Records            |"
         echo "| 4. View All Animal Records               |"
         echo "| 5. Analyze Animal Statistics             |"
-        echo "| 6. Exit                                  |"
+        echo "| 6. Search for a Specific Animal          |"
+        echo "| 7. Exit                                  |"
         echo "============================================"
-        echo -n "Choose an option (1-6): "
+        echo -n "Choose an option (1-7): "
         read main_choice
         case $main_choice in
             1) register_animal ;;
@@ -43,7 +44,8 @@ main_menu() {
             3) remove_animal ;;
             4) view_all_animals ;;
             5) analyze_statistics ;;
-            6) exit_program ;;
+            6) search_animal ;;
+            7) exit_program ;;
             *) echo "Invalid option. Please try again." ; sleep 1 ;;
         esac
     done
@@ -234,7 +236,7 @@ remove_animal() {
     echo "|        REMOVE ANIMAL FROM RECORDS        |"
     echo "============================================"
     echo ""
-    echo -n "Enter the ID of the animal: "
+    echo -n "Enter the ID: "
     read id
 
     # Check if the animal exists in the CSV file
@@ -295,6 +297,50 @@ analyze_statistics() {
         6) main_menu ;;
         *) echo "Invalid option. Please try again." ; analyze_statistics ;;
     esac
+}
+
+search_animal() {
+    clear
+    echo "============================================"
+    echo "|          SEARCH FOR AN ANIMAL            |"
+    echo "============================================"
+    echo ""
+    echo -n "Enter the ID: "
+    read id
+
+    # Check if the animal exists in the CSV file
+    if ! grep -q "$id" "$CSV_FILE"; then
+        echo "Error: No animal with ID $id found in the records."
+        pause_and_return
+        return
+    fi
+
+    # If the animal is found, extract the details and display them
+    animal_details=$(grep ",$id," "$CSV_FILE")
+    IFS=',' read -r animal animal_id breed category sex size health_status arrival_date adoption_status adoption_date adopter_name <<< "$animal_details"
+
+    echo ""
+    echo "============================================"
+    echo "|             ANIMAL DETAILS               |"
+    echo "============================================"
+    echo "| Animal:           $animal"
+    echo "| Animal ID:        $animal_id"
+    echo "| Breed:            $breed"
+    echo "| Category:         $category"
+    echo "| Sex:              $sex"
+    echo "| Size (kg):        $size"
+    echo "| Health Status:    $health_status"
+    echo "| Arrival Date:     $arrival_date"
+    echo "| Adoption Status:  $adoption_status"
+    
+    if [ "$adoption_status" == "Adopted" ]; then
+        echo "| Adoption Date:    $adoption_date"
+        echo "| Adopter Name:     $adopter_name"
+    fi
+    
+    echo "============================================"
+    
+    pause_and_return
 }
 
 # CRANE
