@@ -345,23 +345,46 @@ echo
 echo "Do you want to update this animal?"
 read choicee
 if [ "$choicee" == "yes" ]; then
+echo "1.update_animal"
+echo "2.remove_animal"
+read want
+case "$want" in
+1)
 update
-else
-pause_and_return
+;;
+2)
+remove
+;;
+*)
+echo "Not in the choices"
+;;
+esac
 fi
-fi
+    fi
 if [ "$adoption_status" == "Available" ]; then
 echo
 echo
 echo "Do you want to update this animal?"
 read updates
-fi
-if [ "$updates == "yes" ]; then
+if [ "$updates" == "yes" ]; then
+echo "1.update_animal"
+echo "2.remove_animal"
+read updatess
+case "$updatess" in
+1)
 update
+;;
+2)
+remove
+;;
+*)
+echo "Not in choices"
+;;
+esac
 else
-    
+
     echo "============================================"
-    
+  fi  
     pause_and_return
 fi
 }
