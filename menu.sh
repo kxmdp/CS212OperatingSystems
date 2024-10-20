@@ -315,6 +315,34 @@ adoption_status() {
     echo "============================================"
     echo "|   ADOPTION STATUS OVERVIEW AND SUMMARY   |"
     echo "============================================"
+
+    # Check if the CSV file is empty
+    if [ ! -s "$CSV_FILE" ]; then
+        echo "No animal records available."
+        pause_and_return
+        return
+    fi
+
+    # Extract the counts for adopted and available animals (9th column)
+    adopted_count=$(awk -F, '$9 ~ /Adopted/ {count++} END {print count+0}' "$CSV_FILE")
+    available_count=$(awk -F, '$9 ~ /Available/ {count++} END {print count+0}' "$CSV_FILE")
+
+    # Calculate the total adoption rate (%)
+    total_count=$((adopted_count + available_count))
+    if [ $total_count -eq 0 ]; then
+        adoption_rate=0
+    else
+        adoption_rate=$(echo "scale=2; ($adopted_count / $total_count) * 100" | bc)
+    fi
+
+    # Output
+    echo "Adoption Status:"
+    echo "--------------------------------------------"
+    echo "Number of adopted animals: $adopted_count"
+    echo "Number of available animals: $available_count"
+    echo "Total rate of adoption: $adoption_rate%"
+
+    
     # code here
     pause_and_return
 }
