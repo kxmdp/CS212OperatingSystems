@@ -344,7 +344,7 @@ echo
 echo
 echo "Do you want to update this animal?"
 read choicee
-if [ "$choice" == "yes" ]; then
+if [ "$choicee" == "yes" ]; then
 update
 else
 pause_and_return
