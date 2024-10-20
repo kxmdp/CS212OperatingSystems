@@ -165,7 +165,7 @@ update
     
     
     # Show options for the user to choose what to edit
-update() {#for reuse
+update() {
     echo "What would you like to update?"
     echo "[1] Size in Kilograms"
     echo "[2] Health Status"
