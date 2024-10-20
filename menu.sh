@@ -594,59 +594,70 @@ animal_list() {
 
 
 
-# Function to show arrival and retrieval date summary
+# Function to show arrival and retrieval (adoption) date summary
 date_summary() {
-    clear
+    clear  # Clear the terminal screen for better readability
     echo "============================================"
     echo "|    ARRIVAL AND RETRIEVAL DATE SUMMARY    |"
     echo "============================================"
 
-    # Check if the CSV file is empty
-    if [ ! -s "$CSV_FILE" ]; then
-        echo "No animal records available."
-        pause_and_return
-        return
-    fi
-    
-    # Calculate earliest and latest arrival dates (8th column), excluding the header
-    earliest_arrival=$(tail -n +2 "$CSV_FILE" | cut -d',' -f8 | sort -t'/' -k3,3 -k1,1n -k2,2n | head -n 1)
-    latest_arrival=$(tail -n +2 "$CSV_FILE" | cut -d',' -f8 | sort -t'/' -k3,3 -k1,1n -k2,2n | tail -n 1)
+    # Prompt the user to choose between retrieving arrival or adoption data
+    echo "Choose an option:"
+    echo "1. Retrieve number of animals that arrived"
+    echo "2. Retrieve number of animals that were adopted"
+    read -p "Enter your choice (1 or 2): " choice
 
-    echo "Earliest Arrival Date: $earliest_arrival"
-    echo "Latest Arrival Date: $latest_arrival"
-    echo ""
+    case $choice in
+        1)  # If the user chooses option 1
+            echo "Choose a filter:"
+            echo "a. By month"
+            echo "b. By year"
+            read -p "Enter your choice (a or b): " arrival_filter
+            
+            # If filtering by month
+            if [ "$arrival_filter" == "a" ]; then
+                read -p "Enter the month (MM): " month
+                # Use awk to count the number of animals that arrived in the specified month
+                awk -F, -v month="$month" '$8 ~ "^"month"/" {count++} END {print count " animals arrived in month " month}' "$CSV_FILE"
+            
+            # If filtering by year
+            elif [ "$arrival_filter" == "b" ]; then
+                read -p "Enter the year (YYYY): " year
+                # Use awk to count the number of animals that arrived in the specified year
+                awk -F, -v year="$year" '$8 ~ "/"year"$" {count++} END {print count " animals arrived in year " year}' "$CSV_FILE"
+            else
+                echo "Invalid choice."  # Handle invalid filter choice
+            fi
+            ;;
+        
+        2)  # If the user chooses option 2
+            echo "Choose a filter:"
+            echo "a. By month"
+            echo "b. By year"
+            read -p "Enter your choice (a or b): " adoption_filter
+            
+            # If filtering by month
+            if [ "$adoption_filter" == "a" ]; then
+                read -p "Enter the month (MM): " month
+                # Use awk to count the number of animals that were adopted in the specified month
+                awk -F, -v month="$month" '$10 ~ "^"month"/" {count++} END {print count " animals were adopted in month " month}' "$CSV_FILE"
+            
+            # If filtering by year
+            elif [ "$adoption_filter" == "b" ]; then
+                read -p "Enter the year (YYYY): " year
+                # Use awk to count the number of animals that were adopted in the specified year
+                awk -F, -v year="$year" '$10 ~ "/"year"$" {count++} END {print count " animals were adopted in year " year}' "$CSV_FILE"
+            else
+                echo "Invalid choice."  # Handle invalid filter choice
+            fi
+            ;;
+        
+        *)  # Handle invalid main option choice
+            echo "Invalid choice."
+            ;;
+    esac
 
-    # Extract valid adoption dates (10th column), excluding the header
-    adoption_dates=$(tail -n +2 "$CSV_FILE" | cut -d',' -f10 | grep -E '^[0-9]{1,2}/[0-9]{1,2}/[0-9]{4}' | sort -t'/' -k3,3 -k1,1n -k2,2n)
-
-    # Get earliest and latest adoption dates
-    earliest_adoption=$(echo "$adoption_dates" | head -n 1)
-    latest_adoption=$(echo "$adoption_dates" | tail -n 1)
-
-    # Check if adoption dates are found
-    if [ -z "$earliest_adoption" ]; then
-        earliest_adoption="No valid adoption dates"
-    fi
-
-    if [ -z "$latest_adoption" ]; then
-        latest_adoption="No valid adoption dates"
-    fi
-
-    echo "Earliest Adoption Date: $earliest_adoption"
-    echo "Latest Adoption Date: $latest_adoption"
-    echo ""
-
-    # Count the number of adopted animals, excluding the header
-    adopted_count=$(tail -n +2 "$CSV_FILE" | cut -d',' -f9 | grep -c 'Adopted')
-
-    # Count the number of available animals, excluding the header
-    available_count=$(tail -n +2 "$CSV_FILE" | cut -d',' -f9 | grep -c 'Available')
-
-    echo "Number of Animals Adopted: $adopted_count"
-    echo "Number of Available Animals: $available_count"
-    echo ""
-
-    pause_and_return
+    pause_and_return  # Call a function to pause and return to the main menu
 }
 
 # Utility function to pause and return to the main menu
