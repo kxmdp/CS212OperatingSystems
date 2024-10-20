@@ -5,28 +5,28 @@ DATA_FILE="animal_shelter_records.csv"
 
 # Function to add a new record
 add_record() {
-    echo "Enter Animal Name:"
+    echo -n "Enter Animal Name:"
     read animal
-    echo "Enter Identification Number:"
+    echo -n "Enter Identification Number:"
     read id
-    echo "Enter Breed:"
+    echo -n "Enter Breed:"
     read breed
-    echo "Enter Category (Mammal, Amphibian, etc.):"
+    echo -n "Enter Category (Mammal, Amphibian, etc.):"
     read category
-    echo "Enter Sex (Male, Female, N/A):"
+    echo -n "Enter Sex (Male, Female, N/A):"
     read sex
-    echo "Enter Size in Kilograms:"
+    echo -n "Enter Size in Kilograms:"
     read size
-    echo "Enter Health Status (Healthy, In Treatment, Special Needs):"
+    echo -n "Enter Health Status (Healthy, In Treatment, Special Needs):"
     read health
-    echo "Enter Date of Arrival (YYYY-MM-DD):"
+    echo -n "Enter Date of Arrival (YYYY-MM-DD):"
     read arrival
-    echo "Enter Status of Adoption (Adopted/Available):"
+    echo -n "Enter Status of Adoption (Adopted/Available):"
     read adoption_status
     if [ "$adoption_status" == "Adopted" ]; then
-        echo "Enter Date of Adoption (YYYY-MM-DD):"
+        echo -n "Enter Date of Adoption (YYYY-MM-DD):"
         read adoption_date
-        echo "Enter Name of Adopter:"
+        echo -n "Enter Name of Adopter:"
         read adopter_name
         echo "$animal,$id,$breed,$category,$sex,$size,$health,$arrival,$adoption_status,$adoption_date,$adopter_name" >> $DATA_FILE
     else
