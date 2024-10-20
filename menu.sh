@@ -348,15 +348,65 @@ adoption_status() {
 }
 
 # LANDER
-# Function to show health status overview
+# Function to show health status overview and summary
 health_status() {
     clear
     echo "============================================"
     echo "|    HEALTH STATUS OVERVIEW AND SUMMARY    |"
     echo "============================================"
-    # code here
-    pause_and_return
+
+    # Check if the CSV file is empty
+    if [ ! -s "$CSV_FILE" ]; then
+        echo "No animal records available."
+        pause_and_return_analyze
+        return
+    fi
+
+    # Variables to track counts
+    healthy_count=0
+    treatment_count=0
+    special_needs_count=0
+    deaf_count=0
+    blind_count=0
+    missing_limb_count=0
+
+    # Loop through the records and count the different health statuses
+    while IFS=',' read -r animal id breed category sex size health_status arrival_date adoption_status adoption_date adopter_name; do
+        case "$health_status" in
+            "Healthy")
+                ((healthy_count++))
+                ;;
+            "In Treatment")
+                ((treatment_count++))
+                ;;
+            "With Special Needs - Deaf")
+                ((special_needs_count++))
+                ((deaf_count++))
+                ;;
+            "With Special Needs - Blind")
+                ((special_needs_count++))
+                ((blind_count++))
+                ;;
+            "With Special Needs - Missing a Limb")
+                ((special_needs_count++))
+                ((missing_limb_count++))
+                ;;
+            *)
+                ;;
+        esac
+    done < "$CSV_FILE"
+
+    # Display results
+    echo "Number of Healthy Animals: $healthy_count"
+    echo "Number of Animals in Treatment: $treatment_count"
+    echo "Number of Animals with Special Needs: $special_needs_count"
+    echo "    * Number of Deaf Animals: $deaf_count"
+    echo "    * Number of Blind Animals: $blind_count"
+    echo "    * Number of Animals Missing a Limb: $missing_limb_count"
+    
+    pause_and_return_analyze
 }
+
 
 # BYRON
 # Function to list animals and record highlights
