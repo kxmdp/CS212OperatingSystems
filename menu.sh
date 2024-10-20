@@ -357,6 +357,17 @@ if [[ ! -f "$CSV_FILE" ]]; then
     pause_and_return
     return
 fi
+CATEGORY_COLUMN=${1:-4}
+total=$(wc -l < "$CSV_FILE")
+echo -e "\e[1;32mTotal number of animals: $((total - 1))\e[0m"
+
+echo -e "\n\e[1;33mNumber of animals by category:\e[0m"
+cut -d',' -f"$CATEGORY_COLUMN" "$CSV_FILE" | tail -n +2 | sort | uniq -c | while read -r count category; do
+    echo -e "\e[1;36m$category:\e[0m \e[1;35m$count\e[0m"
+done
+
+echo -e "\e[0m"
+pause_and_return
 }
 
 # ALVIN
