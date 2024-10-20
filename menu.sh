@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # File path for animal records CSV
-CSV_FILE="animalrecords.csv"
+CSV_FILE=~/212Proj/animalrecords
 
 # Function to clear the screen and show the welcome page
 welcome_page() {
@@ -257,6 +257,17 @@ remove_animal() {
         echo "Operation cancelled. Animal record not removed."
     fi
 
+    pause_and_return
+}
+
+# Function to view all animal records
+view_all_animals() {
+    clear
+    echo "============================================"
+    echo "|            ALL ANIMAL RECORDS            |"
+    echo "============================================"
+    echo "All Animal Records:"
+    column -t -s, $CSV_FILE
     pause_and_return
 }
 
