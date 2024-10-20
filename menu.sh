@@ -160,8 +160,12 @@ update_animal() {
     echo "Adoption Date: $adoption_date"
     echo "Adopter Name: $adopter_name"
     echo "--------------------------------------------"
+update
+    }
+    
     
     # Show options for the user to choose what to edit
+update() {#for reuse
     echo "What would you like to update?"
     echo "[1] Size in Kilograms"
     echo "[2] Health Status"
@@ -336,11 +340,30 @@ search_animal() {
     if [ "$adoption_status" == "Adopted" ]; then
         echo "| Adoption Date:    $adoption_date"
         echo "| Adopter Name:     $adopter_name"
-    fi
+echo
+echo
+echo "Do you want to update this animal?"
+read choicee
+if [ "$choice" == "yes" ]; then
+update
+else
+pause_and_return
+fi
+fi
+if [ "$adoption_status" == "Available" ]; then
+echo
+echo
+echo "Do you want to update this animal?"
+read updates
+fi
+if [ "$updates == "yes" ]; then
+update
+else
     
     echo "============================================"
     
     pause_and_return
+fi
 }
 
 # CRANE
