@@ -252,6 +252,8 @@ remove_animal() {
 
     # If the animal exists, confirm removal
     echo "Animal with ID $id found."
+}
+ remove() {
     echo "Are you sure you want to remove this animal from the records? (y/n): "
     read confirmation
 
