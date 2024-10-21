@@ -163,8 +163,7 @@ update_animal() {
 update
     }
     
-    
-    # Show options for the user to choose what to edit
+# Show options for the user to choose what to edit
 update() {
     echo "What would you like to update?"
     echo "[1] Size in Kilograms"
@@ -253,6 +252,7 @@ remove_animal() {
     # If the animal exists, confirm removal
     echo "Animal with ID $id found."
 }
+
  remove() {
     echo "Are you sure you want to remove this animal from the records? (y/n): "
     read confirmation
@@ -315,8 +315,11 @@ search_animal() {
     read id
 
     # Check if the animal exists in the CSV file
-    if ! grep -q "$id" "$CSV_FILE"; then
-        echo "Error: No animal with ID $id found in the records."
+    if ! grep -q ",$id," "$CSV_FILE"; then
+        echo ""
+        echo "============================================"
+        echo "|          ANIMAL NOT FOUND                |"
+        echo "============================================"
         pause_and_return
         return
     fi
@@ -342,53 +345,35 @@ search_animal() {
     if [ "$adoption_status" == "Adopted" ]; then
         echo "| Adoption Date:    $adoption_date"
         echo "| Adopter Name:     $adopter_name"
-echo
-echo
-echo "Do you want to update this animal?"
-read choicee
-if [ "$choicee" == "yes" ]; then
-echo "1.update_animal"
-echo "2.remove_animal"
-read want
-case "$want" in
-1)
-update
-;;
-2)
-remove
-;;
-*)
-echo "Not in the choices"
-;;
-esac
-fi
     fi
-if [ "$adoption_status" == "Available" ]; then
-echo
-echo
-echo "Do you want to update this animal?"
-read updates
-if [ "$updates" == "yes" ]; then
-echo "1.update_animal"
-echo "2.remove_animal"
-read updatess
-case "$updatess" in
-1)
-update
-;;
-2)
-remove
-;;
-*)
-echo "Not in choices"
-;;
-esac
-else
 
     echo "============================================"
-  fi  
+    echo ""
+
+    # Prompt user if they want to update or remove the animal
+    echo -n "Do you want to update or remove this animal? (yes/no): "
+    read choice
+    if [ "$choice" == "yes" ]; then
+        echo ""
+        echo "1. Update Animal"
+        echo "2. Remove Animal"
+        echo -n "Enter your choice (1/2): "
+        read action_choice
+        
+        case "$action_choice" in
+            1)
+                update
+                ;;
+            2)
+                remove
+                ;;
+            *)
+                echo "Invalid choice. Returning to the main menu."
+                ;;
+        esac
+    fi
+
     pause_and_return
-fi
 }
 
 # CRANE
