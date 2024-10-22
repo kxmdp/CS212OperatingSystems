@@ -630,7 +630,7 @@ analyze_statistics() {
     case $stats_choice in
         1) total_animals ;;
         2) adoption_status ;;
-        3) show_health_status ;;  # Added this line
+        3) health_status ;;  # Added this line
         4) animal_list ;;
         5) date_summary ;;
         6) main_menu ;;
@@ -638,7 +638,71 @@ analyze_statistics() {
     esac
 }
 
-
+#BYRON
+animal_list() {
+    clear
+    echo "============================================"
+    echo "|     ANIMAL LIST AND RECORD HIGHLIGHTS    |"
+    echo "============================================"
+    # Function to display animals that lived the longest in the shelter
+    display_longest_lived_animals() {
+        echo "======== Animals that lived the longest in the shelter ========"
+        printf "%-3s %-9s %-17s %-13s %-13s %-10s\n" "No." "Animal ID" "Name of Animal" "Arrival Date" "Adoption Date" "Status"
+        printf "%-3s %-8s %-16s %-14s %-13s %-10s\n" "---" "---------" "----------------" "-------------" "-------------" "-----"
+        awk -F, '
+        NR > 1 {
+            status = ($9 == "Adopted" ? "Adopted" : "Available"); # Determine status based on adoption column
+            # Print formatted output for each row with arrival and adoption dates
+            printf("%-3d %-9s %-17s %-13s %-13s %-10s\n", NR-1, $2, $1, $8, ($9 == "Adopted" ? $10 : "N/A"), status);
+        }' $CSV_FILE | sort -k4,4 | head -n 10 | awk '{printf "%-3d %-9s %-17s %-13s %-13s %-10s\n", NR, $2, $3, $4, $5, $6}'
+    }
+    # Function to display recently arrived animals in the shelter
+    display_recently_arrived_animals() {
+        echo "=== Animals that have recently arrived in the shelter ==="
+        printf "%-5s %-10s %-20s %-15s\n" "No." "Animal ID" "Name of Animal" "Date of Arrival"
+        printf "%-5s %-10s %-20s %-15s\n" "----" "----------" "-------------------" "---------------"
+        # Extract relevant fields, sort by arrival date in reverse (most recent), and display the top 10
+        awk -F, 'NR > 1 {printf "%s,%s,%s,%s\n", $2, $3, $1, $8}' $CSV_FILE | \
+        sort -t, -k4,4r | head -n 10 | \
+        awk -F, '{printf "%-5d %-10s %-20s %-15s\n", NR, $1, $2, $4}'
+    }
+    # Function to display recently adopted animals
+    display_recently_adopted_animals() {
+        echo "=== Animals that have recently been adopted ==="
+        printf "%-5s %-10s %-20s %-15s\n" "No." "Animal ID" "Name of Animal" "Adoption Date"
+        printf "%-5s %-10s %-20s %-15s\n" "----" "----------" "-------------------" "---------------"
+        # Extract relevant fields for adopted animals, sort by adoption date, and display the top 10
+        awk -F, 'NR > 1 && $9 == "Adopted" {printf "%s,%s,%s,%s\n", $2, $3, $1, $10}' $CSV_FILE | \
+        sort -t, -k4,4r | head -n 10 | \
+        awk -F, '{printf "%-5d %-10s %-20s %-15s\n", NR, $1, $2, $4}'
+    }
+    # Menu loop
+    while true; do
+        # Show choices
+        echo "Choices to show: "
+        echo "[1] Animals that lived the longest in the shelter"
+        echo "[2] Animals that have recently arrived in the shelter"
+        echo "[3] Animals that have recently been adopted"
+        
+        # Prompt the user for a choice
+        echo -n "Enter chosen number (1-3): "
+        read choice
+        # Execute the function based on the user's choice
+        case $choice in
+            1) display_longest_lived_animals ;;  # Call function to display longest lived animals
+            2) display_recently_arrived_animals ;;  # Call function to display recent arrivals
+            3) display_recently_adopted_animals ;;  # Call function to display recent adoptions
+            *) echo "Invalid choice. Please enter a number between 1 and 3." ;;  # Invalid choice message
+        esac
+        # Ask the user if they want to make another choice
+        echo -n "Do you want to make another choice? (y/n): "
+        read continue
+        if [[ "$continue" != "y" ]]; then
+            break  # Exit the loop if the user enters anything other than 'y'
+        fi
+    done
+    pause_and_return
+}
 
 
 date_summary() {
