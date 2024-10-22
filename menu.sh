@@ -514,7 +514,7 @@ adoption_status() {
 
 
 # LANDER
-# Function to show health status overview and summary
+# Function to show health status overview and detailed table
 health_status() {
     clear
     echo "============================================"
@@ -539,34 +539,35 @@ health_status() {
     blind_count=0
     missing_limb_count=0
 
+    # Temporary files to hold the respective tables
+    healthy_file=$(mktemp)
+    treatment_file=$(mktemp)
+    special_needs_file=$(mktemp)
+
     # Loop through the records and count the different health statuses
     while IFS=',' read -r animal id breed category sex size health_status arrival_date adoption_status adoption_date adopter_name; do
         case "$health_status" in
             "Healthy")
                 ((healthy_count++))
+                echo "$animal,$id,$breed,$category,$sex,$size,$arrival_date,$adoption_status" >> "$healthy_file"
                 ;;
             "In Treatment")
                 ((treatment_count++))
+                echo "$animal,$id,$breed,$category,$sex,$size,$arrival_date,$adoption_status" >> "$treatment_file"
                 ;;
-            "Special Needs - Deaf")
+            "Special Needs - Deaf"|"Special Needs - Blind"|"Special Needs - Missing a Limb")
                 ((special_needs_count++))
-                ((deaf_count++))
-                ;;
-            "Special Needs - Blind")
-                ((special_needs_count++))
-                ((blind_count++))
-                ;;
-            "Special Needs - Missing a Limb")
-                ((special_needs_count++))
-                ((missing_limb_count++))
-                ;;
-            *)
+                echo "$animal,$id,$breed,$category,$sex,$size,$arrival_date,$adoption_status,$health_status" >> "$special_needs_file"
+                case "$health_status" in
+                    "Special Needs - Deaf") ((deaf_count++)) ;;
+                    "Special Needs - Blind") ((blind_count++)) ;;
+                    "Special Needs - Missing a Limb") ((missing_limb_count++)) ;;
+                esac
                 ;;
         esac
     done < "$CSV_FILE"
 
-    # Display results
-    echo "|                                          "
+    # Display counts
     echo "| Number of Healthy Animals: $healthy_count "
     echo "| Number of Animals in Treatment: $treatment_count "
     echo "| Number of Animals with Special Needs: $special_needs_count "
@@ -576,85 +577,65 @@ health_status() {
     echo "|                                          "
     echo "============================================"
 
+    # Show detailed tables based on user choice
+    echo "Choose what to display:"
+    echo "[1] Show Healthy Animals Table"
+    echo "[2] Show Animals in Treatment Table"
+    echo "[3] Show Animals with Special Needs Table"
+    echo "[4] Return to Main Menu"
+    read -p "Enter option (1-4): " option
+
+    case $option in
+        1) 
+            echo "Healthy Animals:"
+            column -t -s',' "$healthy_file"
+            ;;
+        2) 
+            echo "Animals in Treatment:"
+            column -t -s',' "$treatment_file"
+            ;;
+        3) 
+            echo "Animals with Special Needs:"
+            column -t -s',' "$special_needs_file"
+            ;;
+        4) 
+            main_menu
+            ;;
+        *) 
+            echo "Invalid option."
+            ;;
+    esac
+
+    rm "$healthy_file" "$treatment_file" "$special_needs_file"
     pause_and_return
 }
 
-
-#BYRON
-animal_list() {
-    # Clear the screen
+# Add the new option in the analyze_statistics menu
+analyze_statistics() {
     clear
-    echo "============================================"
-    echo "|     ANIMAL LIST AND RECORD HIGHLIGHTS    |"
-    echo "============================================"
-
-    # Function to display animals that lived the longest in the shelter
-    display_longest_lived_animals() {
-        echo "======== Animals that lived the longest in the shelter ========"
-        printf "%-3s %-9s %-17s %-13s %-13s %-10s\n" "No." "Animal ID" "Name of Animal" "Arrival Date" "Adoption Date" "Status"
-        printf "%-3s %-8s %-16s %-14s %-13s %-10s\n" "---" "---------" "----------------" "-------------" "-------------" "-----"
-
-        awk -F, '
-        NR > 1 {
-            status = ($9 == "Adopted" ? "Adopted" : "Available"); # Determine status based on adoption column
-            # Print formatted output for each row with arrival and adoption dates
-            printf("%-3d %-9s %-17s %-13s %-13s %-10s\n", NR-1, $2, $1, $8, ($9 == "Adopted" ? $10 : "N/A"), status);
-        }' $CSV_FILE | sort -k4,4 | head -n 10 | awk '{printf "%-3d %-9s %-17s %-13s %-13s %-10s\n", NR, $2, $3, $4, $5, $6}'
-    }
-
-    # Function to display recently arrived animals in the shelter
-    display_recently_arrived_animals() {
-        echo "=== Animals that have recently arrived in the shelter ==="
-        printf "%-5s %-10s %-20s %-15s\n" "No." "Animal ID" "Name of Animal" "Date of Arrival"
-        printf "%-5s %-10s %-20s %-15s\n" "----" "----------" "-------------------" "---------------"
-
-        # Extract relevant fields, sort by arrival date in reverse (most recent), and display the top 10
-        awk -F, 'NR > 1 {printf "%s,%s,%s,%s\n", $2, $3, $1, $8}' $CSV_FILE | \
-        sort -t, -k4,4r | head -n 10 | \
-        awk -F, '{printf "%-5d %-10s %-20s %-15s\n", NR, $1, $2, $4}'
-    }
-
-    # Function to display recently adopted animals
-    display_recently_adopted_animals() {
-        echo "=== Animals that have recently been adopted ==="
-        printf "%-5s %-10s %-20s %-15s\n" "No." "Animal ID" "Name of Animal" "Adoption Date"
-        printf "%-5s %-10s %-20s %-15s\n" "----" "----------" "-------------------" "---------------"
-
-        # Extract relevant fields for adopted animals, sort by adoption date, and display the top 10
-        awk -F, 'NR > 1 && $9 == "Adopted" {printf "%s,%s,%s,%s\n", $2, $3, $1, $10}' $CSV_FILE | \
-        sort -t, -k4,4r | head -n 10 | \
-        awk -F, '{printf "%-5d %-10s %-20s %-15s\n", NR, $1, $2, $4}'
-    }
-
-    # Menu loop
-    while true; do
-        # Show choices
-        echo "Choices to show: "
-        echo "[1] Animals that lived the longest in the shelter"
-        echo "[2] Animals that have recently arrived in the shelter"
-        echo "[3] Animals that have recently been adopted"
-        
-        # Prompt the user for a choice
-        echo -n "Enter chosen number (1-3): "
-        read choice
-
-        # Execute the function based on the user's choice
-        case $choice in
-            1) display_longest_lived_animals ;;  # Call function to display longest lived animals
-            2) display_recently_arrived_animals ;;  # Call function to display recent arrivals
-            3) display_recently_adopted_animals ;;  # Call function to display recent adoptions
-            *) echo "Invalid choice. Please enter a number between 1 and 3." ;;  # Invalid choice message
-        esac
-
-        # Ask the user if they want to make another choice
-        echo -n "Do you want to make another choice? (y/n): "
-        read continue
-        if [[ "$continue" != "y" ]]; then
-            break  # Exit the loop if the user enters anything other than 'y'
-        fi
-    done
-    pause_and_return
+    echo "============================================="
+    echo "|         ANIMAL STATISTICS ANALYSIS        |"
+    echo "============================================="
+    echo "| 1. Total Number of Animals and by Category|"
+    echo "| 2. Adoption Status Overview and Summary   |"
+    echo "| 3. Health Status Overview and Summary     |"
+    echo "| 4. Animal List and Record Highlights      |"
+    echo "| 5. Arrival and Retrieval Date Summary     |"
+    echo "| 6. Return to Main Menu                    |"
+    echo "============================================="
+    echo -n "Choose an option (1-6): "
+    read stats_choice
+    case $stats_choice in
+        1) total_animals ;;
+        2) adoption_status ;;
+        3) show_health_status ;;  # Added this line
+        4) animal_list ;;
+        5) date_summary ;;
+        6) main_menu ;;
+        *) echo "Invalid option. Please try again." ; analyze_statistics ;;
+    esac
 }
+
 
 
 
