@@ -68,7 +68,7 @@ register_animal() {
     read id
 
     # Check if the animal already exists based on the ID or name
-    if grep -q "$id" "$CSV_FILE" || grep -q "$animal" "$CSV_FILE"; then
+    if grep -q "^$id," "$CSV_FILE"; then
         echo "|                                          "
         echo "============================================"
         echo "|       ERROR: Animal already exists!      |"
