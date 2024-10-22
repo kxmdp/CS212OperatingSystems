@@ -162,7 +162,7 @@ update_animal() {
     IFS=',' read -r animal id breed category sex size health_status arrival_date adoption_status adoption_date adopter_name <<< "$animal_record"
     
     echo "|------------------------------------------|"
-    echo "| Animal $id Record Found:                 |"
+    echo "| Animal $id Record Found:            "
     echo "|------------------------------------------|"
     echo "| Animal: $animal                         "
     echo "| Animal ID: $id                          "
@@ -253,8 +253,17 @@ update() {
     esac
 
     # Remove the old record and append the updated one
-    sed -i "/$id/d" "$CSV_FILE"  # Remove the old record from the file
+    if [[ "$OSTYPE" == "darwin"* ]]; then
+        # For macOS, use 'sed -i '' '
+        sed -i '' "/$id/d" "$CSV_FILE"
+    else
+        # For Linux and other OS, use 'sed -i'
+        sed -i "/$id/d" "$CSV_FILE"
+    fi
+
+    # Append the updated record to the CSV file
     echo "$animal,$id,$breed,$category,$sex,$size,$health_status,$arrival_date,$adoption_status,$adoption_date,$adopter_name" >> "$CSV_FILE"
+
     
     echo "|                                          |"
     echo "============================================"
@@ -263,8 +272,6 @@ update() {
     
     pause_and_return
 }
-
-
 
 # Function to remove an animal from records
 remove_animal() {
@@ -296,7 +303,6 @@ remove_animal() {
     remove
 }
 
-
  remove() {
     echo -n "| Are you sure you want to remove? (y/n): "
     read confirmation
@@ -318,7 +324,6 @@ remove_animal() {
     pause_and_return
 }
 
-
 # Function to view all animal records
 view_all_animals() {
     clear
@@ -336,33 +341,6 @@ view_all_animals() {
     echo ""
     echo "============================================"
     pause_and_return
-}
-
-
-# Function to analyze animal statistics
-analyze_statistics() {
-    clear
-    echo "============================================="
-    echo "|         ANIMAL STATISTICS ANALYSIS        |"
-    echo "============================================="
-    echo "| 1. Total Number of Animals and by Category|"
-    echo "| 2. Adoption Status Overview and Summary   |"
-    echo "| 3. Health Status Overview and Summary     |"
-    echo "| 4. Animal List and Record Highlights      |"
-    echo "| 5. Arrival and Retrieval Date Summary     |"
-    echo "| 6. Return to Main Menu                    |"
-    echo "============================================="
-    echo -n "Choose an option (1-6): "
-    read stats_choice
-    case $stats_choice in
-        1) total_animals ;;
-        2) adoption_status ;;
-        3) health_status ;;
-        4) animal_list ;;
-        5) date_summary ;;
-        6) main_menu ;;
-        *) echo "Invalid option. Please try again." ; analyze_statistics ;;
-    esac
 }
 
 search_animal() {
@@ -436,7 +414,32 @@ search_animal() {
     pause_and_return
 }
 
-# CRANE
+# Function to analyze animal statistics
+analyze_statistics() {
+    clear
+    echo "============================================="
+    echo "|         ANIMAL STATISTICS ANALYSIS        |"
+    echo "============================================="
+    echo "| 1. Total Number of Animals and by Category|"
+    echo "| 2. Adoption Status Overview and Summary   |"
+    echo "| 3. Health Status Overview and Summary     |"
+    echo "| 4. Animal List and Record Highlights      |"
+    echo "| 5. Arrival and Retrieval Date Summary     |"
+    echo "| 6. Return to Main Menu                    |"
+    echo "============================================="
+    echo -n "Choose an option (1-6): "
+    read stats_choice
+    case $stats_choice in
+        1) total_animals ;;
+        2) adoption_status ;;
+        3) health_status ;;
+        4) animal_list ;;
+        5) date_summary ;;
+        6) main_menu ;;
+        *) echo "Invalid option. Please try again." ; analyze_statistics ;;
+    esac
+}
+
 # Function to show total number of animals and by category
 total_animals() {
     clear
@@ -472,8 +475,6 @@ total_animals() {
     pause_and_return
 }
 
-
-# ALVIN
 # Function to show adoption status overview
 adoption_status() {
     clear
@@ -514,8 +515,6 @@ adoption_status() {
     pause_and_return
 }
 
-
-# LANDER
 # Function to show health status overview and detailed table
 health_status() {
     clear
@@ -612,33 +611,6 @@ health_status() {
     pause_and_return
 }
 
-# Add the new option in the analyze_statistics menu
-analyze_statistics() {
-    clear
-    echo "============================================="
-    echo "|         ANIMAL STATISTICS ANALYSIS        |"
-    echo "============================================="
-    echo "| 1. Total Number of Animals and by Category|"
-    echo "| 2. Adoption Status Overview and Summary   |"
-    echo "| 3. Health Status Overview and Summary     |"
-    echo "| 4. Animal List and Record Highlights      |"
-    echo "| 5. Arrival and Retrieval Date Summary     |"
-    echo "| 6. Return to Main Menu                    |"
-    echo "============================================="
-    echo -n "Choose an option (1-6): "
-    read stats_choice
-    case $stats_choice in
-        1) total_animals ;;
-        2) adoption_status ;;
-        3) health_status ;;  # Added this line
-        4) animal_list ;;
-        5) date_summary ;;
-        6) main_menu ;;
-        *) echo "Invalid option. Please try again." ; analyze_statistics ;;
-    esac
-}
-
-#BYRON
 animal_list() {
     clear
     echo "============================================"
@@ -703,7 +675,6 @@ animal_list() {
     done
     pause_and_return
 }
-
 
 date_summary() {
     clear  # Clear the terminal screen for better readability
@@ -794,8 +765,6 @@ date_summary() {
     pause_and_return  # Call a function to pause and return to the main menu
 }
 
-
-
 # Utility function to pause and return to the main menu
 pause_and_return() {
     echo ""
@@ -829,7 +798,6 @@ exit_program() {
     sleep 2  # Optional: pause for 2 seconds before exiting
     exit 0
 }
-
 
 # Start the script by displaying the welcome page and main menu
 welcome_page
