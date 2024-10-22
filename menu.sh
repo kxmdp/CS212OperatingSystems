@@ -343,6 +343,7 @@ view_all_animals() {
     pause_and_return
 }
 
+# Function to search a specific animal record
 search_animal() {
     clear
     echo "============================================"
@@ -611,11 +612,13 @@ health_status() {
     pause_and_return
 }
 
+# Function to display animal list and record highlights
 animal_list() {
     clear
     echo "============================================"
     echo "|     ANIMAL LIST AND RECORD HIGHLIGHTS    |"
     echo "============================================"
+    
     # Function to display animals that lived the longest in the shelter
     display_longest_lived_animals() {
         echo "======== Animals that lived the longest in the shelter ========"
@@ -628,6 +631,7 @@ animal_list() {
             printf("%-3d %-9s %-17s %-13s %-13s %-10s\n", NR-1, $2, $1, $8, ($9 == "Adopted" ? $10 : "N/A"), status);
         }' $CSV_FILE | sort -k4,4 | head -n 10 | awk '{printf "%-3d %-9s %-17s %-13s %-13s %-10s\n", NR, $2, $3, $4, $5, $6}'
     }
+    
     # Function to display recently arrived animals in the shelter
     display_recently_arrived_animals() {
         echo "=== Animals that have recently arrived in the shelter ==="
@@ -638,6 +642,7 @@ animal_list() {
         sort -t, -k4,4r | head -n 10 | \
         awk -F, '{printf "%-5d %-10s %-20s %-15s\n", NR, $1, $2, $4}'
     }
+    
     # Function to display recently adopted animals
     display_recently_adopted_animals() {
         echo "=== Animals that have recently been adopted ==="
@@ -648,6 +653,7 @@ animal_list() {
         sort -t, -k4,4r | head -n 10 | \
         awk -F, '{printf "%-5d %-10s %-20s %-15s\n", NR, $1, $2, $4}'
     }
+    
     # Menu loop
     while true; do
         # Show choices
@@ -676,6 +682,7 @@ animal_list() {
     pause_and_return
 }
 
+# Function to display arrival and retrieval date summary
 date_summary() {
     clear  # Clear the terminal screen for better readability
     echo "============================================"
