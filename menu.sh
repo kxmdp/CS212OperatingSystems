@@ -62,33 +62,34 @@ register_animal() {
     # Input animal information with design
     echo "| Please enter the following information:  |"
     echo "|------------------------------------------|"
-    echo -n "| Animal:             "
+    echo -n "| Animal: "
     read animal
-    echo -n "| Identification ID:  "
+    echo -n "| Identification ID: "
     read id
 
     # Check if the animal already exists based on the ID or name
     if grep -q "$id" "$CSV_FILE" || grep -q "$animal" "$CSV_FILE"; then
         echo "|                                          "
         echo "============================================"
-        echo "|    ERROR: Animal already exists!         |"
+        echo "|       ERROR: Animal already exists!      |"
         echo "============================================"
         pause_and_return
         return
     fi
 
     # Continue if no match is found
-    echo -n "| Breed:              "
+    echo -n "| Breed: "
     read breed
-    echo -n "| Category:           "
+    echo -n "| Category: "
     read category
     echo -n "| Sex (Male/Female/NA): "
     read sex
-    echo -n "| Size (in kg):       "
+    echo -n "| Size (in kg): "
     read size
     
     # Health Status Input
-    echo -n "| Health Status (Healthy/In Treatment/With Special Needs): "
+    echo "| (Healthy/In Treatment/With Special Needs)"
+    echo -n "| Health Status: "
     read health_status
     if [ "$health_status" == "With Special Needs" ]; then
         echo "|------------------------------------------|"
@@ -110,12 +111,13 @@ register_animal() {
     # Continue with the rest of the registration process
     echo -n "| Arrival Date (YYYY-MM-DD): "
     read arrival_date
-    echo -n "| Adoption Status (Adopted/Available): "
+    echo "| (Adopted/Available)"
+    echo -n "| Adoption Status: "
     read adoption_status
     if [ "$adoption_status" == "Adopted" ]; then
         echo -n "| Adoption Date (YYYY-MM-DD): "
         read adoption_date
-        echo -n "| Adopter Name:       "
+        echo -n "| Adopter Name: "
         read adopter_name
     else
         adoption_date=""
@@ -141,7 +143,7 @@ update_animal() {
     
     # Prompt the user for the animal ID to update
     echo "|------------------------------------------|"
-    echo -n "| Enter Animal ID:              "
+    echo -n "| Enter Animal ID: "
     read id
     
     # Check if the animal exists in the CSV file
@@ -191,7 +193,7 @@ update() {
     echo "[1] Size in Kilograms"
     echo "[2] Health Status"
     echo "[3] Status of Adoption"
-    echo -n "| Choose an option (1-3):                "
+    echo -n "| Choose an option (1-3): "
     read update_choice
 
     echo "|"
@@ -199,21 +201,21 @@ update() {
     case $update_choice in
         1)
             # Update size in kilograms
-            echo -n "| Enter new size (in kg):                "
+            echo -n "| Enter new size (in kg): "
             read new_size
             size=$new_size
             ;;
         2)
             # Update health status
             echo "| (Healthy/In Treatment/With Special Needs)"
-            echo -n "| Enter new health status:                "
+            echo -n "| Enter new health status: "
             read new_health_status
             if [ "$new_health_status" == "With Special Needs" ]; then
                 echo "| Please specify the type of special need: |"
                 echo "| 1) Deaf                                  |"
                 echo "| 2) Blind                                 |"
                 echo "| 3) Missing a Limb                        |"
-                echo -n "| Choose an option (1-3):                 "
+                echo -n "| Choose an option (1-3): "
                 read special_needs_choice
                 case $special_needs_choice in
                     1) new_health_status="With Special Needs - Deaf" ;;
@@ -227,12 +229,12 @@ update() {
         3)
             # Update adoption status
             echo "| (Adopted/Available)"
-            echo -n "| Enter new adoption status:               "
+            echo -n "| Enter new adoption status: "
             read new_adoption_status
             if [ "$new_adoption_status" == "Adopted" ]; then
-                echo -n "| Enter adoption date (YYYY-MM-DD):       "
+                echo -n "| Enter adoption date (YYYY-MM-DD): "
                 read new_adoption_date
-                echo -n "| Enter adopter's name:                   "
+                echo -n "| Enter adopter's name: "
                 read new_adopter_name
                 adoption_status=$new_adoption_status
                 adoption_date=$new_adoption_date
@@ -271,7 +273,7 @@ remove_animal() {
     echo "|        REMOVE ANIMAL FROM RECORDS        |"
     echo "============================================"
     echo "|                                          "
-    echo -n "| Enter the ID:                            "
+    echo -n "| Enter the ID: "
     read id
 
     # Check if the animal exists in the CSV file
@@ -376,7 +378,7 @@ search_animal() {
     if ! grep -q ",$id," "$CSV_FILE"; then
         echo ""
         echo "============================================"
-        echo "|          ANIMAL NOT FOUND                |"
+        echo "|             ANIMAL NOT FOUND             |"
         echo "============================================"
         pause_and_return
         return
@@ -461,7 +463,7 @@ total_animals() {
     echo "--------------------------------------------"
     
     cut -d',' -f"$CATEGORY_COLUMN" "$CSV_FILE" | tail -n +2 | sort | uniq -c | while read -r count category; do
-        echo "|   $category:   $count                     "
+        echo "|   $category: $count                     "
     done
 
     echo "--------------------------------------------"
