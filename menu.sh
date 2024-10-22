@@ -379,28 +379,30 @@ search_animal() {
 # CRANE
 # Function to show total number of animals and by category
 total_animals() {
-clear
-echo "============================================"
-echo "|    TOTAL NUMBER OF ANIMALS & CATEGORY    |"
-echo "============================================"
-echo -e "\e[1;34m"
+    clear
+    echo "============================================"
+    echo "|    TOTAL NUMBER OF ANIMALS & CATEGORY    |"
+    echo "============================================"
+    echo ""
 
-if [[ ! -f "$CSV_FILE" ]]; then
-    echo -e "\e[1;31mError: CSV file not found!\e[0m"
+    if [[ ! -f "$CSV_FILE" ]]; then
+        echo "Error: CSV file not found!"
+        pause_and_return
+        return
+    fi
+    
+    CATEGORY_COLUMN=${1:-4}
+    total=$(wc -l < "$CSV_FILE")
+    echo "Total number of animals: $((total - 1))"
+    echo ""
+
+    echo "Number of animals by category:"
+    cut -d',' -f"$CATEGORY_COLUMN" "$CSV_FILE" | tail -n +2 | sort | uniq -c | while read -r count category; do
+        echo -e "\t$category:\t$count"
+    done
+
+    echo ""
     pause_and_return
-    return
-fi
-CATEGORY_COLUMN=${1:-4}
-total=$(wc -l < "$CSV_FILE")
-echo -e "\e[1;32mTotal number of animals: $((total - 1))\e[0m"
-
-echo -e "\n\e[1;33mNumber of animals by category:\e[0m"
-cut -d',' -f"$CATEGORY_COLUMN" "$CSV_FILE" | tail -n +2 | sort | uniq -c | while read -r count category; do
-    echo -e "\e[1;36m$category:\e[0m \e[1;35m$count\e[0m"
-done
-
-echo -e "\e[0m"
-pause_and_return
 }
 
 # ALVIN
@@ -431,8 +433,7 @@ adoption_status() {
     fi
 
     # Output
-    echo "Adoption Status:"
-    echo "--------------------------------------------"
+    echo ""
     echo "Number of adopted animals: $adopted_count"
     echo "Number of available animals: $available_count"
     echo "Total rate of adoption: $adoption_rate%"
@@ -474,15 +475,15 @@ health_status() {
             "In Treatment")
                 ((treatment_count++))
                 ;;
-            "With Special Needs - Deaf")
+            "Special Needs - Deaf")
                 ((special_needs_count++))
                 ((deaf_count++))
                 ;;
-            "With Special Needs - Blind")
+            "Special Needs - Blind")
                 ((special_needs_count++))
                 ((blind_count++))
                 ;;
-            "With Special Needs - Missing a Limb")
+            "Special Needs - Missing a Limb")
                 ((special_needs_count++))
                 ((missing_limb_count++))
                 ;;
@@ -579,7 +580,6 @@ animal_list() {
 
 
 
-# Function to show arrival and retrieval (adoption) date summary
 date_summary() {
     clear  # Clear the terminal screen for better readability
     echo "============================================"
@@ -602,14 +602,15 @@ date_summary() {
             # If filtering by month
             if [ "$arrival_filter" == "a" ]; then
                 read -p "Enter the month (MM): " month
-                # Use awk to count the number of animals that arrived in the specified month
-                awk -F, -v month="$month" '$8 ~ "^"month"/" {count++} END {print count " animals arrived in month " month}' "$CSV_FILE"
+                read -p "Enter the year (YYYY): " year
+                # Use awk to count the number of animals that arrived in the specified month and year
+                awk -F, -v month="$year-$month" '$8 ~ month {count++} END {print count " animals arrived in " month}' "$CSV_FILE"
             
             # If filtering by year
             elif [ "$arrival_filter" == "b" ]; then
                 read -p "Enter the year (YYYY): " year
                 # Use awk to count the number of animals that arrived in the specified year
-                awk -F, -v year="$year" '$8 ~ "/"year"$" {count++} END {print count " animals arrived in year " year}' "$CSV_FILE"
+                awk -F, -v year="$year" '$8 ~ year {count++} END {print count " animals arrived in year " year}' "$CSV_FILE"
             else
                 echo "Invalid choice."  # Handle invalid filter choice
             fi
@@ -624,14 +625,15 @@ date_summary() {
             # If filtering by month
             if [ "$adoption_filter" == "a" ]; then
                 read -p "Enter the month (MM): " month
-                # Use awk to count the number of animals that were adopted in the specified month
-                awk -F, -v month="$month" '$10 ~ "^"month"/" {count++} END {print count " animals were adopted in month " month}' "$CSV_FILE"
+                read -p "Enter the year (YYYY): " year
+                # Use awk to count the number of animals that were adopted in the specified month and year
+                awk -F, -v month="$year-$month" '$10 ~ month {count++} END {print count " animals were adopted in " month}' "$CSV_FILE"
             
             # If filtering by year
             elif [ "$adoption_filter" == "b" ]; then
                 read -p "Enter the year (YYYY): " year
                 # Use awk to count the number of animals that were adopted in the specified year
-                awk -F, -v year="$year" '$10 ~ "/"year"$" {count++} END {print count " animals were adopted in year " year}' "$CSV_FILE"
+                awk -F, -v year="$year" '$10 ~ year {count++} END {print count " animals were adopted in year " year}' "$CSV_FILE"
             else
                 echo "Invalid choice."  # Handle invalid filter choice
             fi
@@ -644,6 +646,7 @@ date_summary() {
 
     pause_and_return  # Call a function to pause and return to the main menu
 }
+
 
 # Utility function to pause and return to the main menu
 pause_and_return() {
